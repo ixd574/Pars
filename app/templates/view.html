@@ -71,6 +71,10 @@
             <p class="lead">View processed document results</p>
         </div>
 
+        <div class="back-link">
+            <a href="/" class="btn btn-secondary">Upload Another File</a>
+        </div>
+
         <div class="result-container">
             <h2>Results</h2>
             
@@ -87,9 +91,6 @@
             
             <pre id="jsonView" {{ 'style=display:none;' if format_type == 'markdown' else '' }}>{{ content if format_type == 'json' else '' }}</pre>
             
-            <div class="back-link">
-                <a href="/" class="btn btn-secondary">Upload Another File</a>
-            </div>
         </div>
     </div>
 
