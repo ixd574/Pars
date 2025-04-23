@@ -65,6 +65,27 @@
     </style>
 </head>
 <body>
+    <div id="loginShield" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+">
+    <h2>🔐 Enter Login Credentials</h2>
+    <form id="shieldForm" style="display: flex; flex-direction: column; gap: 1rem; width: 300px;">
+        <input type="text" id="shieldUsername" placeholder="Username" required style="padding: 0.5rem;">
+        <input type="password" id="shieldPassword" placeholder="Password" required style="padding: 0.5rem;">
+        <div id="shieldError" style="color: red; display: none;">Invalid credentials</div>
+        <button type="submit" style="padding: 0.5rem; background-color: #007bff; color: white; border: none; cursor: pointer;">Log In</button>
+    </form>
+</div>
+
     <div class="container">
         <div class="header">
             <h1>Document Parsing App</h1>
@@ -120,5 +141,22 @@
             });
         });
     </script>
+    <script>
+        document.getElementById('shieldForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const username = document.getElementById('shieldUsername').value;
+          const password = document.getElementById('shieldPassword').value;
+          const errorDiv = document.getElementById('shieldError');
+      
+          if (username === 'kitrum2025' && password === 'kitrum2025') {
+            document.getElementById('loginShield').style.display = 'none';
+          } else {
+            errorDiv.style.display = 'block';
+          }
+        });
+      
+        document.body.style.overflow = 'hidden';
+      </script>
+      
 </body>
 </html>
