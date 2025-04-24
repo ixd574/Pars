@@ -81,6 +81,30 @@
     </style>
 </head>
 <body>
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="authModalLabel">Authentication Required</h5>
+            </div>
+            <div class="modal-body">
+              <form id="authForm">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+                <div id="authError" class="text-danger mb-2" style="display: none;">Incorrect login or password.</div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     <div class="container">
         <div class="header">
             <h1>Document Parsing App</h1>
@@ -200,6 +224,29 @@
                     window.location.href = '/view/markdown';
                 }
             }
+            // Show auth modal on page load
+        const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+        authModal.show();
+
+        const authForm = document.getElementById('authForm');
+        const authError = document.getElementById('authError');
+
+        const VALID_USERNAME = 'kitrum2025';
+        const VALID_PASSWORD = 'kitrum2025';
+
+        authForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                authModal.hide();
+            } else {
+                authError.style.display = 'block';
+            }
+        });
+
         });
     </script>
 </body>
