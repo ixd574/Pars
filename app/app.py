@@ -20,7 +20,9 @@ app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'docx', 'doc', 'txt', 'csv', 'xls', '
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # API key from environment
-API_KEY = "rOMPNDmLDkgqFXtsySPU9LJX8fjJ78q4aF5OMZBj"
+API_KEY = os.getenv('API_KEY')
+if not API_KEY:
+    raise EnvironmentError('API_KEY environment variable not set')
 
 def allowed_file(filename):
     return '.' in filename and \
