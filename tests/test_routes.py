@@ -6,8 +6,12 @@ import json
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from app import app as flask_app
+
+# Ensure API_KEY is available before importing the application
+os.environ.setdefault("API_KEY", "dummy-key")
+
 app_module = importlib.import_module("app.app")
+flask_app = app_module.app
 
 @pytest.fixture()
 def client(tmp_path, monkeypatch):
