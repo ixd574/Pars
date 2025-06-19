@@ -9,11 +9,14 @@ This Flask application parses documents using the RunPulse API. It requires an A
    pip install -r requirements.txt
    ```
 
-2. Export your API key before launching the app:
+2. Export your API key and start the Flask server:
    ```bash
    export API_KEY=<your-key>
    python app/app.py
    ```
+
+3. Open `http://localhost:5000` in your browser and upload a document.
+   The parsed output will be saved to `app/result.json`.
 
 ## Docker
 
