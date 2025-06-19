@@ -13,6 +13,7 @@ After=network.target
 User=ubuntu
 WorkingDirectory=/home/ubuntu/deployment/app
 Environment="PYTHONPATH=/home/ubuntu/deployment/lib"
+Environment="API_KEY=${API_KEY}"
 ExecStart=/usr/bin/python3 /home/ubuntu/deployment/app/app.py
 Restart=always
 
