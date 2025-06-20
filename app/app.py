@@ -21,8 +21,6 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # API key from environment
 API_KEY = os.getenv('API_KEY')
-if not API_KEY:
-    raise EnvironmentError('API_KEY environment variable not set')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -61,6 +59,9 @@ def upload_file():
 
 def process_file(filepath):
     """Process the file using document parsing API and return the result"""
+    api_key = API_KEY or os.getenv('API_KEY')
+    if not api_key:
+        raise EnvironmentError('API_KEY environment variable not set')
     file_extension = filepath.rsplit('.', 1)[1].lower()
     
     # Set content type based on file extension
@@ -82,7 +83,7 @@ def process_file(filepath):
     # Prepare the API request
     url = 'https://api.runpulse.com/convert'
     headers = {
-        'x-api-key': API_KEY,
+        'x-api-key': api_key,
         'Content-Type': content_type
     }
     
@@ -97,7 +98,7 @@ def process_file(filepath):
             # Use the presigned URL to extract the content
             extract_url = 'https://api.runpulse.com/extract'
             extract_headers = {
-                'x-api-key': API_KEY,
+                'x-api-key': api_key,
                 'Content-Type': 'application/json'
             }
             extract_data = {
